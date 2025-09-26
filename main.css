@@ -1,0 +1,152 @@
+
+#header {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+#menu{
+    background-color: aquamarine;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+#master {
+    display: flex;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    height: 5vh;
+
+    font-size: 1.5em;
+    align-items: center;
+
+}
+#isMaster{
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+.menu-btn {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
+}   
+.menu-btn:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer; /* Hover 시 커서 변경 */
+    transform: scale(1.02); /* 크기 1.2배 확대 */
+    border-radius: 0px;
+    border: 3px solid black;
+    transition: transform 0.2s; /* 부드럽게 확대 */
+}
+
+
+#select_list_container {
+    position: absolute;
+    width: 100vw;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    background-color: lightgray;
+    opacity: 0.9;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.video_description{
+    width: 80%;
+    height: auto;
+    position: relative;
+    border: 1px solid black;
+    background-color: lightyellow;
+    text-align: center ;
+    font-size: 15px;
+    margin: 0 auto; /* 가운데 정렬 */
+}
+.video_description:hover{
+    background-color: lightcyan;
+    cursor: pointer; /* Hover 시 커서 변경 */
+    transform: scale(1.02); /* 크기 1.2배 확대 */
+    border-radius: 0px;
+    border: 3px solid black;
+    transition: transform 0.2s; /* 부드럽게 확대 */
+}
+
+.not_started {
+    background: rgba(150,150,150,1);
+    pointer-events: none; /* 클릭 방지 */
+    filter: grayscale(0.8) ; /* 모든 내용 회색빛으로 */
+}
+.not_started_label {
+    color: white;
+    background-color: darkred;
+    font-weight: bold;
+    font-size: 2em;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+
+    padding: 4px 12px;
+    border-radius: 8px;
+    z-index: 2;
+
+    filter: none; /* 흑백 필터 무시 */
+}
+
+
+
+
+
+#content_container{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    align-items: center;
+    padding: 0 5%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#control_mini_video{
+    position: absolute;
+    height: 8vh;
+    right: 10%;
+    padding: 0 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
+}
+#control_mini_video:hover {
+    background-color: gray;
+    color: white;
+     cursor: pointer; /* Hover 시 커서 변경 */
+    transform: scale(1.02); /* 크기 1.2배 확대 */
+    border-radius: 0px;
+    border: 3px solid black;
+    transition: transform 0.2s; /* 부드럽게 확대 */
+}
