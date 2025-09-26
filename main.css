@@ -56,6 +56,12 @@
     transition: transform 0.2s; /* 부드럽게 확대 */
 }
 
+#qaBtn{
+    background-color: gray;
+    pointer-events: none; /* 클릭 방지 */
+}
+
+
 
 #select_list_container {
     position: absolute;
