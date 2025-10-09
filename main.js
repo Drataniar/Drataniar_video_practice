@@ -129,16 +129,16 @@ function showVideo(title, videoId, miniid){
     videoContainer.innerHTML = `
         <div id="video_top_bar" style="width:100%; height:10vh; display:flex; align-items:center;">
             <h2 style="text-align: center;">${title}</h2>
-            <button id="control_mini_video">작은 영상 표시 안하기</button>
+            <button id="control_mini_video">수화 표시 안하기</button>
         </div>
         <div id="main_video_wrapper" style="position:relative; width:90vw; height:90vh;">
             <iframe id="main_video" width="100%" height="100%"
                 src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
                 frameborder="0" allow="autoplay; encrypted-media" ></iframe>
-            <iframe id="mini_video" width="35%" height="35%"
+            <iframe id="mini_video" width="100%" height="100%"
                 src="https://www.youtube.com/embed/${miniid}?enablejsapi=1&mute=1"
                 frameborder="0" allow="autoplay; encrypted-media" 
-                style="position:absolute; right:0; bottom:0; z-index:1000; border-radius:8px; pointer-events:none;">
+                style="position:absolute; right:0; bottom:0; z-index:1000;">
             </iframe>
         </div>
     `;
@@ -152,10 +152,10 @@ function showVideo(title, videoId, miniid){
             miniVisible = !miniVisible;
             if (miniVisible) {
                 miniVideoElem.style.visibility = 'visible';
-                controlBtn.textContent = '작은 영상 표시 안하기';
+                controlBtn.textContent = '수화 표시 안하기';
             } else {
                 miniVideoElem.style.visibility = 'hidden';
-                controlBtn.textContent = '작은 영상 표시하기';
+                controlBtn.textContent = '수화 표시하기';
             }
         });
     }, 200);
@@ -186,8 +186,26 @@ function showVideo(title, videoId, miniid){
                 'onPlaybackRateChange': syncMiniPlayer
             }
         });
-        window._miniPlayer = new YT.Player('mini_video');
+        window._miniPlayer = new YT.Player('mini_video',{
+            events: {
+                'onStateChange': function(event) {
+                                    muteAll(event);
+                                    syncMainPlayer(event);
+                                },
+                'onPlaybackQualityChange': syncMainPlayer,
+                'onPlaybackRateChange': syncMainPlayer,
+                'onVolumeChange': muteAll
+            }
+        });
     }
+
+    function muteAll(event) {
+            // 항상 음소거 유지
+            if (!window._miniPlayer.isMuted()) {
+                window._miniPlayer.mute();
+            }
+        }
+
 
     // 동기화 함수
     function syncMiniPlayer(event) {
@@ -214,11 +232,56 @@ function showVideo(title, videoId, miniid){
         }
     }
 
+    function syncMainPlayer(event) {
+        const mainPlayer = window._mainPlayer;
+        const miniPlayer = window._miniPlayer;
+        if (!mainPlayer || !miniPlayer) return;
+        // 재생/일시정지 동기화
+        if (event.data === YT.PlayerState.PLAYING) {
+            mainPlayer.playVideo();
+        } else if (event.data === YT.PlayerState.PAUSED) {
+            mainPlayer.pauseVideo();
+        }
+        // 진행 상황 동기화
+        const mainTime = mainPlayer.getCurrentTime();
+        const miniTime = miniPlayer.getCurrentTime();
+        if (Math.abs(mainTime - miniTime) > 1) {
+            mainPlayer.seekTo(miniTime, true);
+        }
+        // 재생속도 동기화
+        const mainRate = mainPlayer.getPlaybackRate();
+        const miniRate = miniPlayer.getPlaybackRate();
+        if (mainRate !== miniRate) {
+            mainPlayer.setPlaybackRate(miniRate);
+        }
+    }
+
     // 영상 선택 시마다 API 및 플레이어 생성
     loadYTAPIAndCreatePlayers();
 
 
 }
+
+
+function showVideo2(title, videoId, miniid){
+    const videoContainer = document.getElementById('content_container');
+    videoContainer.innerHTML = `
+        <div id="video_top_bar" style="width:100%; height:10vh; display:flex; align-items:center;">
+            <h2 style="text-align: center;">${title}</h2>
+            <button id="control_mini_video">작은 영상 표시 안하기</button>
+        </div>
+        <div id="main_video_wrapper" style="position:relative; width:90vw; height:90vh;">
+            <video id="main_video" width="100%" height="100%" controls>
+                <source src="https://drive.google.com/uc?export=download&id=${videoId}" type="video/mp4">
+            </video>
+            <video id="mini_video" width="35%" height="35%" muted
+                style="position:absolute; right:0; bottom:0; z-index:1000; border-radius:8px; pointer-events:none;">
+                <source src="https://drive.google.com/uc?export=download&id=${miniid}" type="video/mp4">
+            </video>
+        </div>
+    `;
+}
+
 
 /*
 const mainVideo = document.getElementById('main_video');

@@ -61,6 +61,15 @@ app.get('/video/list', async (req, res) => {
     }
 });
 
+app.get('/video2/list', async (req, res) => {
+        try {
+        const sql = 'SELECT title, id, miniid, date FROM video2';
+        const results = await db.query(sql);
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ error: 'DB 오류', err });
+    }
+});
 
 
 app.get('/', (req, res) => {
