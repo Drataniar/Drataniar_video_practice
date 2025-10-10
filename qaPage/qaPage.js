@@ -57,6 +57,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 });
 
 
+
 videoBtn.addEventListener('click', function(){
 
     location.href = '../main.html';
@@ -68,6 +69,7 @@ async function makeWhoToChat()
     document.getElementById('qaSendBtn').onclick = null;
     qaWithName.textContent = '';
     qaMessages.innerHTML = '';
+    clearQaContent('none');
 
     try {
         const res = await fetch('/chatUser', {
@@ -77,7 +79,7 @@ async function makeWhoToChat()
         const data = await res.json();
         console.log(data);
         if (Array.isArray(data.names)) {
-            selectListContainer.innerHTML = ''; // 기존 내용 비우기
+            clearSelectListContainer('flex','qa');
             data.names.forEach(name => {
                 console.log(name);
                 const btn = document.createElement('button');
@@ -94,7 +96,8 @@ async function makeWhoToChat()
 }
 
 async function startChat(toId, toName){
-    selectListContainer.innerHTML = '';
+    clearSelectListContainer('none','');
+    clearQaContent('flex');
 
     document.getElementById('qaSendBtn').onclick = () => sendChat(toId);
 
@@ -140,7 +143,7 @@ async function startChat(toId, toName){
                     msgBox.style.textAlign = 'right';
                 } else {
                     // 상대 메시지: 왼쪽
-                    msgBox.style.background = '#fff';
+                    msgBox.style.background = '#f0f196ff';
                     msgBox.style.marginRight = 'auto';
                     msgBox.style.textAlign = 'left';
                 }
@@ -187,6 +190,15 @@ async function sendChat(toId){
 
 }
 
+function clearSelectListContainer(display,value) {
+    selectListContainer.innerHTML = '';
+    selectListContainer.style.display = `${display}`;
+    selectListContainer.dataset.value = `${value}`; 
+}
+
+function clearQaContent(display){
+    qaContentContainer.style.display = `${display}`;
+}
 
 
 document.addEventListener('DOMContentLoaded', function() {
