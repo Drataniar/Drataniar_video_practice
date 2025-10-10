@@ -1,6 +1,10 @@
 
 const selectListContainer = document.getElementById("select_list_container");
 
+document.getElementById('qaBtn').addEventListener('click', function(){
+    location.href = 'qaPage/qaPage.html';
+});
+
 document.getElementById('logoutBtn').addEventListener('click', async function() {
     if (window._mainPlayer) window._mainPlayer.destroy();
         if (window._miniPlayer) window._miniPlayer.destroy();
@@ -129,7 +133,7 @@ function showVideo(title, videoId, miniid){
     videoContainer.innerHTML = `
         <div id="video_top_bar" style="width:100%; height:10vh; display:flex; align-items:center;">
             <h2 style="text-align: center;">${title}</h2>
-            <button id="control_mini_video">수화 표시 안하기</button>
+            <button id="control_mini_video">수어 OFF</button>
         </div>
         <div id="main_video_wrapper" style="position:relative; width:90vw; height:90vh;">
             <iframe id="main_video" width="100%" height="100%"
@@ -138,7 +142,7 @@ function showVideo(title, videoId, miniid){
             <iframe id="mini_video" width="100%" height="100%"
                 src="https://www.youtube.com/embed/${miniid}?enablejsapi=1&mute=1"
                 frameborder="0" allow="autoplay; encrypted-media" 
-                style="position:absolute; right:0; bottom:0; z-index:1000;">
+                style="position:absolute; right:0; bottom:0; z-index:10;">
             </iframe>
         </div>
     `;
@@ -152,10 +156,10 @@ function showVideo(title, videoId, miniid){
             miniVisible = !miniVisible;
             if (miniVisible) {
                 miniVideoElem.style.visibility = 'visible';
-                controlBtn.textContent = '수화 표시 안하기';
+                controlBtn.textContent = '수어 OFF';
             } else {
                 miniVideoElem.style.visibility = 'hidden';
-                controlBtn.textContent = '수화 표시하기';
+                controlBtn.textContent = '수어 ON';
             }
         });
     }, 200);
@@ -262,7 +266,7 @@ function showVideo(title, videoId, miniid){
 
 }
 
-
+/*
 function showVideo2(title, videoId, miniid){
     const videoContainer = document.getElementById('content_container');
     videoContainer.innerHTML = `
@@ -281,7 +285,7 @@ function showVideo2(title, videoId, miniid){
         </div>
     `;
 }
-
+*/
 
 /*
 const mainVideo = document.getElementById('main_video');

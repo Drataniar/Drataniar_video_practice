@@ -56,7 +56,9 @@
     transition: transform 0.2s; /* 부드럽게 확대 */
 }
 
-
+#qaBtn{
+    background-color: gray;
+}
 
 
 
@@ -121,35 +123,3 @@
 
 
 
-
-#content_container{
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    align-items: center;
-    padding: 0 5%;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-#control_mini_video{
-    position: absolute;
-    height: 8vh;
-    right: 10%;
-    padding: 0 10px;
-    font-size: 1em;
-    border: none;
-    border-radius: 5px;
-    background-color: lightgray;
-    color: black;
-    cursor: pointer;
-}
-#control_mini_video:hover {
-    background-color: gray;
-    color: white;
-     cursor: pointer; /* Hover 시 커서 변경 */
-    transform: scale(1.02); /* 크기 1.2배 확대 */
-    border-radius: 0px;
-    border: 3px solid black;
-    transition: transform 0.2s; /* 부드럽게 확대 */
-}

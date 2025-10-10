@@ -25,9 +25,10 @@ app.use(session({
 app.post('/login', async (req, res) => {
 	const { id, password } = req.body;
 	try {
-		const rows = await db.query('SELECT id, master FROM user_info WHERE id = ? AND password = ?', [id, password]);
+		const rows = await db.query('SELECT id, master, name FROM user_info WHERE id = ? AND password = ?', [id, password]);
 		if (rows.length > 0) {
 			req.session.userId = rows[0].id; // 세션에 아이디 저장
+			req.session.userName = rows[0].name; // 세션에 이름 저장
             req.session.isMaster = rows[0].master; // 마스터 여부 저장
             console.log(req.session);
 			res.json({ success: true });
@@ -80,9 +81,60 @@ app.get('/main.html', (req, res) => {
 	res.sendFile(path.join(__dirname, 'main.html'));
 });
 
+app.get('/qaPage/qaPage.html', (req, res) => {
+	res.sendFile(path.join(__dirname, 'qaPage/qaPage.html'));
+});
+
 //master인지 확인
 app.get('/getSessionInfo', (req, res) => {
-    res.json({ isMaster: req.session.isMaster, userId: req.session.userId });
+    res.json({ isMaster: req.session.isMaster, userId: req.session.userId, userName: req.session.userName });
+});
+
+app.get('/chatUser', async(req, res) => {
+	try {
+        let targetMaster = req.session.isMaster === 1 ? 0 : 1;
+        const names = await db.query('SELECT name, id FROM user_info WHERE master = ?', [targetMaster]);
+        res.json({ names });
+
+    } catch (err) {
+        res.status(500).json({ error: 'DB 오류', err });
+    }
+});
+
+app.post('/startChat',async(req,res)=>{
+	const { fromId, toId } = req.body;
+    try {
+        const sql = `
+            SELECT * 
+            FROM qaTable
+            WHERE (fromId = ? AND toId = ?)
+            OR (fromId = ? AND toId = ?)
+			ORDER BY time ASC, id ASC
+        `;
+        const results = await db.query(sql, [fromId, toId, toId, fromId]);
+        res.json({ chats: results });
+    } catch (err) {
+        res.status(500).json({ error: 'DB 오류', err });
+    }
+});
+
+
+app.post('/sendMessage', async (req, res) => {
+	const {toId, content} = req.body;	
+    if (!toId || !content) {
+        return res.status(400).json({ success: false, message: '필수 정보 누락' });
+    }
+    try {
+        const sql = `
+            INSERT INTO qaTable (fromId, toId, content, time)
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+        `;
+        await db.query(sql, [req.session.userId, toId, content]);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'DB 오류', error: err.message });
+    }
+
 });
 
 app.listen(PORT);

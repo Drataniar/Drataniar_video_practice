@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="qaPage.css">
+    <title>qaPage</title>
+</head>
+<body>
+
+    <div id="header">
+        <div id="master">
+            <p id="isMaster">1</p>
+        </div>
+    <div id="menu">
+        <button class="menu-btn" id="videoBtn">영상</button>
+        <button class="menu-btn" id="qaBtn">질의응답</button>
+        <button class="menu-btn" id="logoutBtn">로그아웃</button>
+
+    </div>
+    <div id="select_list_container">
+
+    </div>
+    </div>
+    <div id="qa-content-container">
+        <div id ="qa-name">
+            <h2 id="qa-with-name"></h2>
+        </div>
+        <div id="qa-container">
+            <div id="qa-messages">
+                <!-- 채팅 메시지가 여기에 표시됩니다 -->
+                
+            </div>
+            <div id="qa-input-container">
+                <input type="text" id="qa-input" placeholder="내용을 입력하세요...">
+                <button id="qaSendBtn">전송</button>
+            </div>
+    </div>
+    
+    <script src="qaPage.js"></script>
+</body>
+</html>
