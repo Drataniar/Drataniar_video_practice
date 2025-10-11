@@ -1,6 +1,6 @@
 
 const selectListContainer = document.getElementById("select_list_container");
-
+/*
 document.getElementById('qaBtn').addEventListener('click', function(){
     location.href = 'qaPage/qaPage.html';
 });
@@ -8,10 +8,25 @@ document.getElementById('qaBtn').addEventListener('click', function(){
 document.getElementById('aiQaBtn').addEventListener('click', function(){
     location.href = 'https://chatgpt.com/';
 });
-
+*/
 function toMain(){
     selectListContainer.innerHTML = '';
-    location.href = 'main.html';
+    location.href = 'home.html';
+}
+
+
+const params = new URLSearchParams(window.location.search);
+const type = params.get('type');
+
+// type 값에 따라 분기 처리
+if (type === 'notice') {
+    // 알림, 공지사항 관련 코드
+} else if (type === 'video') {
+    // 영상 관련 코드
+}  else if (type === 'ai') {
+    // AI 질문 관련 코드
+} else if (type === 'sign') {
+    // 수어 관련 코드
 }
 
 document.getElementById('logoutBtn').addEventListener('click', async function() {

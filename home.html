@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <title>home</title>
+</head>
+<body>
+    <div id="header">
+        <div id="master">
+            <p id="isMaster">1</p>
+        </div>
+    <div id="menu">
+        <button class="menu-btn" id="firstPageBtn" onclick="toMain()">처음으로</button>
+        <button class="menu-btn" id="logoutBtn">로그아웃</button>
+    </div>
+</div>
+    <div id="content_container">
+        <div class="menuBtn" onclick="goToMain('notice')">
+            <p>알림, 공지사항</p>
+        </div>
+        <div class="menuBtn" onclick="goToMain('video')">
+            <p>10월 실습과제 영상으로 학습하기</p>
+        </div>
+        <div class="menuBtn" onclick="goToMain('qa')">
+            <p>질문(선생님에게 톡하기)</p>
+        </div>
+        <div class="menuBtn" onclick="goToMain('ai')">
+            <p>AI에게 질문하기</p>
+        </div>
+        <div class="menuBtn" onclick="goToMain('sign')">
+            <p>제과제빵 전문용어 수어로 배우기</p>
+        </div>
+    </div>
+
+    <script src="home.js"></script>
+</body>
+</html>

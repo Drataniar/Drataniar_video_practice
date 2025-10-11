@@ -3,17 +3,10 @@ const qaContentContainer = document.getElementById("qa-content-container");
 const qaMessages = document.getElementById("qa-messages");
 const qaWithName = document.getElementById("qa-with-name");
 
-document.getElementById('qaBtn').addEventListener('click', function(){
-    makeWhoToChat();
-});
-
-document.getElementById('aiQaBtn').addEventListener('click', function(){
-    location.href = 'https://chatgpt.com/';
-});
 
 function toMain(){
     selectListContainer.innerHTML = '';
-    location.href = '../main.html';
+    location.href = '../home.html';
 }
 
 document.getElementById('logoutBtn').addEventListener('click', async function() {
@@ -67,11 +60,6 @@ window.addEventListener('DOMContentLoaded', async function() {
 
 
 
-videoBtn.addEventListener('click', function(){
-
-    location.href = '../main.html';
-    
-});
 
 async function makeWhoToChat()
 {

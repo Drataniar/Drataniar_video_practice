@@ -1,0 +1,125 @@
+#header {
+    width: 100vw;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+#menu{
+    background-color: aquamarine;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+}
+
+#master {
+    display: flex;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    height: 5vh;
+
+    font-size: 1.5em;
+    align-items: center;
+
+}
+#isMaster{
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+}
+
+.menu-btn {
+    height: 8vh;
+    font-size: 1.5em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
+}   
+.menu-btn:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer; /* Hover 시 커서 변경 */
+    transform: scale(1.02); /* 크기 1.2배 확대 */
+    border-radius: 0px;
+    border: 3px solid black;
+    transition: transform 0.2s; /* 부드럽게 확대 */
+}
+
+#firstPageBtn{
+    background-color: red;
+    color: white;
+    border: 5px solid black;
+}
+
+
+@media (max-width: 768px) {
+    .menu-btn {
+        font-size: 0.8em;
+    }   
+}
+@media (max-height: 600px) {
+    .menu-btn {
+        font-size: 0.6em;
+
+    }   
+    #master {
+        font-size: 1em;
+    }   
+
+}
+@media (max-height: 400px) {
+    .menu-btn {
+        font-size: 0.4em;
+
+    }   
+    #master {
+        font-size: 0.8em;
+    }   
+
+}
+
+
+#content_container {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 7%;
+
+}
+
+.menuBtn{
+    width: 80%;
+    height: 10vh;
+    position: relative;
+    border: 1px solid black;
+    background-color: lightyellow;
+    text-align: center ;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    margin: 0 auto; /* 가운데 정렬 */
+}
+.menuBtn:hover{
+    background-color: lightcyan;
+    cursor: pointer; /* Hover 시 커서 변경 */
+    transform: scale(1.02); /* 크기 1.2배 확대 */
+    border-radius: 0px;
+    border: 3px solid black;
+    transition: transform 0.2s; /* 부드럽게 확대 */
+}
