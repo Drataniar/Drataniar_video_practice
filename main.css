@@ -118,6 +118,13 @@
 
     filter: none; /* 흑백 필터 무시 */
 }
+.important_description{
+    background-color: white;
+    font-size: 1.3em;
+    font-weight: 600;
+    pointer-events: none; /* 클릭 방지 */
+    filter: grayscale(0.8) ; /* 모든 내용 회색빛으로 */
+}
 
 
 #play_video_btn {

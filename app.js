@@ -54,7 +54,7 @@ app.post('/logout', (req, res) => {
 
 app.get('/video/list', async (req, res) => {
         try {
-        const sql = 'SELECT title, id, miniid, date FROM video';
+        const sql = 'SELECT title, id, miniid, date, info FROM video';
         const results = await db.query(sql);
         res.json(results);
     } catch (err) {
@@ -75,6 +75,9 @@ app.get('/video2/list', async (req, res) => {
 
 app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, 'index.html'));
+});
+app.get('/home.html', (req, res) => {
+	res.sendFile(path.join(__dirname, 'home.html'));
 });
 
 app.get('/main.html', (req, res) => {
@@ -137,6 +140,14 @@ app.post('/sendMessage', async (req, res) => {
 
 });
 
-
+app.get('/signVideo/list', async (req, res) => {
+        try {
+        const sql = 'SELECT title, id, num FROM signVideo ORDER BY num ASC';
+        const results = await db.query(sql);
+        res.json(results);
+    } catch (err) {
+        res.status(500).json({ error: 'DB 오류', err });
+    }
+});
 
 app.listen(PORT);

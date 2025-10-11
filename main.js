@@ -1,14 +1,8 @@
 
 const selectListContainer = document.getElementById("select_list_container");
-/*
-document.getElementById('qaBtn').addEventListener('click', function(){
-    location.href = 'qaPage/qaPage.html';
-});
+const contentContainer = document.getElementById("content_container");
 
-document.getElementById('aiQaBtn').addEventListener('click', function(){
-    location.href = 'https://chatgpt.com/';
-});
-*/
+
 function toMain(){
     selectListContainer.innerHTML = '';
     location.href = 'home.html';
@@ -20,13 +14,29 @@ const type = params.get('type');
 
 // type 값에 따라 분기 처리
 if (type === 'notice') {
+    contentContainer.innerHTML = '';
+    contentContainer.innerHTML = `
+        <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+            <h2 style="text-align: center;">공지사항</h2>
+            <img src="./img/loginPage.jpg" alt="공지사항 이미지" style="max-width:70%; max-height:80%; height:auto; margin-bottom:20px;">
+            <p>현재 공지사항이 없습니다.</p>
+        </div>
+    `;
     // 알림, 공지사항 관련 코드
 } else if (type === 'video') {
-    // 영상 관련 코드
+    videoBtnClick();
 }  else if (type === 'ai') {
-    // AI 질문 관련 코드
+    contentContainer.style.height = '85vh';
+    contentContainer.style.backgroundImage = "url('./img/AIintro.jpg')";
+    contentContainer.style.backgroundSize = 'contain'; // 사진 전체가 보이도록
+    contentContainer.style.backgroundPosition = 'center';
+    contentContainer.style.backgroundRepeat = 'no-repeat';
+    contentContainer.style.backgroundColor = '#000'; // 남는 공간이 검정색으로 보이게(원하면 변경)
+    contentContainer.onclick = function() {
+        location.href = 'https://chatgpt.com/';
+    };
 } else if (type === 'sign') {
-    // 수어 관련 코드
+    signVideoBtnClick();
 }
 
 document.getElementById('logoutBtn').addEventListener('click', async function() {
@@ -79,9 +89,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 });
 
 
-videoBtn.addEventListener('click', function(){
-
-    //location.href = 'video.html';
+function videoBtnClick(){
 
     if(selectListContainer.style.display === 'flex'){
         //이미 표시 중이면 숨기기
@@ -110,12 +118,10 @@ videoBtn.addEventListener('click', function(){
                 div.className = "video_description";
                 div.onclick = function() {
                     clearSelectListContainer('none','');
-                    showInfo(video.title, video.id, video.miniid);
-};
+                    showInfo(video.title, video.id, video.miniid, video.info);
+                };
                 div.innerHTML = `
                     <p class="video_title">${video.title}</p>
-                    <p class="video_date">
-                    ${new Date(video.date).toLocaleDateString()}</p>
                     `;
 
                     // end_date와 현재 날짜/시각 비교
@@ -143,7 +149,7 @@ videoBtn.addEventListener('click', function(){
     }
     console.log('end');
     
-});
+}
 
 function clearSelectListContainer(display,value) {
     selectListContainer.innerHTML = '';
@@ -152,13 +158,12 @@ function clearSelectListContainer(display,value) {
 }
 
 
-function showInfo(title, videoId, miniid){
+function showInfo(title, videoId, miniid, info){
     const videoContainer = document.getElementById('content_container');
     videoContainer.innerHTML = `
         <div id="video_info" style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">${title}</h2>
-            <p>영상 ID: ${videoId} | 수어 영상 ID: ${miniid}</p>
-            <p>단팥빵입니다.</p>
+            <p>${info}</p>
             <button id="play_video_btn" onclick="showVideo('${title}', '${videoId}', '${miniid}')" ">영상 재생</button>
         </div>
     `;
@@ -303,38 +308,105 @@ function showVideo(title, videoId, miniid){
 
 }
 
-/*
-function showVideo2(title, videoId, miniid){
+
+
+
+
+function signVideoBtnClick(){
+
+    if(selectListContainer.style.display === 'flex'){
+        //이미 표시 중이면 숨기기
+        clearSelectListContainer('none','');
+        return;
+    }
+    else{
+        // 1. 데이터베이스에서 영상 목록 받아오기
+    fetch(`/signVideo/list`)
+        .then(res => res.json())
+        .then(videoList => {
+            console.log("Video List fetched:", videoList);
+
+            // 3. select_list_container 초기화
+            clearSelectListContainer('flex','video');
+
+            const div = document.createElement("div");
+                div.className = "video_description";
+                div.onclick = function() {
+                    clearSelectListContainer('none','');
+                };
+                div.innerHTML = `
+                    <p>제과제빵 실습에 필요한 전공용어 중<br> 
+                    수어 표현이 없는 단어를 대전직업능력개발원에서 자체 제작 후<br>
+                    대전지역 청각 협회에 심의를 거처 교육을 목적으로 영상 제작</p>
+                    <p>(영상으로 수어를 학습하세요)</p>`;
+                div.classList.add('important_description');
+            selectListContainer.appendChild(div);
+            
+
+            videoList.forEach(video => {
+                const div = document.createElement("div");
+                div.className = "video_description";
+                div.onclick = function() {
+                    clearSelectListContainer('none','');
+                    showVideo2(video.title, video.id);
+                };
+                div.innerHTML = `
+                    <p>${video.num}.</p>
+                    <p class="video_title">${video.title}</p>
+                    `;
+
+            selectListContainer.appendChild(div);
+            });
+
+        })
+        .catch(err => {
+            alert('영상 목록 불러오기 실패: ' + err);
+        });
+
+
+    }
+    console.log('end');
+    
+}
+
+function showVideo2(title, videoId){
     const videoContainer = document.getElementById('content_container');
     videoContainer.innerHTML = `
         <div id="video_top_bar" style="width:100%; height:10vh; display:flex; align-items:center;">
             <h2 style="text-align: center;">${title}</h2>
-            <button id="control_mini_video">작은 영상 표시 안하기</button>
         </div>
         <div id="main_video_wrapper" style="position:relative; width:90vw; height:90vh;">
-            <video id="main_video" width="100%" height="100%" controls>
-                <source src="https://drive.google.com/uc?export=download&id=${videoId}" type="video/mp4">
-            </video>
-            <video id="mini_video" width="35%" height="35%" muted
-                style="position:absolute; right:0; bottom:0; z-index:1000; border-radius:8px; pointer-events:none;">
-                <source src="https://drive.google.com/uc?export=download&id=${miniid}" type="video/mp4">
-            </video>
+            <iframe id="main_video" width="100%" height="100%"
+                src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
+                frameborder="0" allow="autoplay; encrypted-media" ></iframe>
         </div>
     `;
-}
-*/
 
-/*
-const mainVideo = document.getElementById('main_video');
-        const miniVideo = document.getElementById('mini_video');
-        if (mainVideo && miniVideo) {
-            miniVideo.muted = true;
-            // main_video 재생 시 mini_video도 재생
-            mainVideo.addEventListener('play', () => {
-                miniVideo.play();
-            });
-            // main_video 일시정지 시 mini_video도 일시정지
-            mainVideo.addEventListener('pause', () => {
-                miniVideo.pause();
-            });
-        }*/
+
+    // YouTube IFrame API 로드 (최초 1회만)
+    function loadYTAPIAndCreatePlayers() {
+        if (!window.YT) {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            document.body.appendChild(tag);
+            window.onYouTubeIframeAPIReady = createPlayers;
+        } else {
+            createPlayers();
+        }
+    }
+
+    // 플레이어 생성 및 동기화
+    function createPlayers() {
+        // 기존 플레이어 객체 제거
+        if (window._mainPlayer) window._mainPlayer.destroy();
+        // 새 플레이어 생성
+        window._mainPlayer = new YT.Player('main_video', {
+            events: {
+            }
+        });
+    }
+    // 영상 선택 시마다 API 및 플레이어 생성
+    loadYTAPIAndCreatePlayers();
+
+
+}
