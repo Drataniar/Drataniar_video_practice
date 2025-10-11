@@ -44,11 +44,11 @@ window.addEventListener('DOMContentLoaded', async function() {
         const isMaster = document.getElementById('isMaster');
         console.log(data);
         if (data.isMaster === 1) {
-            masterDiv.style.backgroundColor = 'lightcoral';
+            masterDiv.style.backgroundColor = 'orange';
             isMaster.textContent = '선생님';
             isMaster.style.color = 'white';
         } else {
-            masterDiv.style.backgroundColor = 'lightgreen';
+            masterDiv.style.backgroundColor = 'rgb(36, 128, 214)';
             isMaster.textContent = '학생';
             isMaster.style.color = 'black';
         }

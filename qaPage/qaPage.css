@@ -226,3 +226,30 @@
     border: 3px solid black;
     transition: transform 0.2s; /* 부드럽게 확대 */
 }
+
+#firstPageBtn{
+    background-color: red;
+    color: white;
+    border: 5px solid black;
+}
+
+@media (max-width: 768px) {
+    .menu-btn {
+        font-size: 1em;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: lightgray;
+        color: black;
+        cursor: pointer;
+    }   
+    .menu-btn:hover {
+        background-color: gray;
+        color: white;
+        cursor: pointer; /* Hover 시 커서 변경 */
+        transform: scale(1.02); /* 크기 1.2배 확대 */
+        border-radius: 0px;
+        border: 3px solid black;
+        transition: transform 0.2s; /* 부드럽게 확대 */
+    }
+}

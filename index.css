@@ -64,3 +64,11 @@
 }
 
 
+@media(max-width: 768px) {
+    #id_text, #pw_text {
+        width: 60%;
+    }
+    #loginBtn {
+        width: 40%;
+    }
+}
