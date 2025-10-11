@@ -7,6 +7,12 @@ document.getElementById('qaBtn').addEventListener('click', function(){
     makeWhoToChat();
 });
 
+document.getElementById('aiQaBtn').addEventListener('click', function(){
+    location.href = 'https://chatgpt.com/';
+});
+
+
+
 document.getElementById('logoutBtn').addEventListener('click', async function() {
     if (window._mainPlayer) window._mainPlayer.destroy();
         if (window._miniPlayer) window._miniPlayer.destroy();

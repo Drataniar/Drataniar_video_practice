@@ -120,6 +120,27 @@
     filter: none; /* 흑백 필터 무시 */
 }
 
+.chat-user-btn{
+    width: 10%;
+    height: 10%;
+    font-size: 1.5em;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+
+}
+.chat-user-btn:hover {
+    background-color: gray;
+    color: white;
+    cursor: pointer; /* Hover 시 커서 변경 */
+    transform: scale(1.02); /* 크기 1.2배 확대 */
+    border-radius: 0px;
+    border: 3px solid black;
+    transition: transform 0.2s; /* 부드럽게 확대 */
+}
+
 
 #qa-content-container{
     width: 100vw;

@@ -5,6 +5,10 @@ document.getElementById('qaBtn').addEventListener('click', function(){
     location.href = 'qaPage/qaPage.html';
 });
 
+document.getElementById('aiQaBtn').addEventListener('click', function(){
+    location.href = 'https://chatgpt.com/';
+});
+
 document.getElementById('logoutBtn').addEventListener('click', async function() {
     if (window._mainPlayer) window._mainPlayer.destroy();
         if (window._miniPlayer) window._miniPlayer.destroy();
@@ -86,7 +90,7 @@ videoBtn.addEventListener('click', function(){
                 div.className = "video_description";
                 div.onclick = function() {
                     clearSelectListContainer('none','');
-                    showVideo(video.title, video.id, video.miniid);
+                    showInfo(video.title, video.id, video.miniid);
 };
                 div.innerHTML = `
                     <p class="video_title">${video.title}</p>
@@ -125,6 +129,19 @@ function clearSelectListContainer(display,value) {
     selectListContainer.innerHTML = '';
     selectListContainer.style.display = `${display}`;
     selectListContainer.dataset.value = `${value}`; 
+}
+
+
+function showInfo(title, videoId, miniid){
+    const videoContainer = document.getElementById('content_container');
+    videoContainer.innerHTML = `
+        <div id="video_info" style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+            <h2 style="text-align: center;">${title}</h2>
+            <p>영상 ID: ${videoId} | 수어 영상 ID: ${miniid}</p>
+            <p>단팥빵입니다.</p>
+            <button id="play_video_btn" onclick="showVideo('${title}', '${videoId}', '${miniid}')" ">영상 재생</button>
+        </div>
+    `;
 }
 
 
