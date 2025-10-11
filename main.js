@@ -9,6 +9,11 @@ document.getElementById('aiQaBtn').addEventListener('click', function(){
     location.href = 'https://chatgpt.com/';
 });
 
+function toMain(){
+    selectListContainer.innerHTML = '';
+    location.href = 'main.html';
+}
+
 document.getElementById('logoutBtn').addEventListener('click', async function() {
     if (window._mainPlayer) window._mainPlayer.destroy();
         if (window._miniPlayer) window._miniPlayer.destroy();
