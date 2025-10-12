@@ -253,9 +253,13 @@
 
 @media (max-width: 768px) {
     #menuInfoText{
-        font-size: 1em;
+        font-size: 0.8em;
+    }
+    .menu-btn {
+        font-size: 0.8em;
     }
 }
+
 
 
 /*
