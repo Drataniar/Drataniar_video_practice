@@ -252,6 +252,12 @@
 }
 
 @media (max-width: 768px) {
+    #menu{
+        height: 80px;
+    }
+    #menuInfo{
+        height: 30px;
+    }
     #menuInfoText{
         font-size: 0.8em;
     }
@@ -259,6 +265,7 @@
         font-size: 0.8em;
     }
 }
+
 
 
 
