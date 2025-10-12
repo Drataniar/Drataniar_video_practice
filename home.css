@@ -1,6 +1,6 @@
 #header {
     width: 100vw;
-    height: 15vh;
+    height: 200px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -10,7 +10,7 @@
 #menu{
     background-color: aquamarine;
     width: 100%;
-    height: 10vh;
+    height: 100px;
     display: flex;
     flex-direction: row;
     padding: 0;
@@ -19,13 +19,26 @@
     justify-content: space-evenly;
     position: relative;
 }
+#menuInfo{
+    text-align: center;
+    background-color: aquamarine;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+}
+#menuInfoText{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 1.5em;
+}
 
 #master {
     display: flex;
     width: 100vw;
     margin: 0;
     padding: 0;
-    height: 5vh;
+    height: 50px;
 
     font-size: 1.5em;
     align-items: center;
@@ -38,7 +51,6 @@
 }
 
 .menu-btn {
-    height: 8vh;
     font-size: 1.5em;
     padding: 10px 20px;
     border: none;
@@ -63,7 +75,13 @@
     border: 5px solid black;
 }
 
+@media (max-width: 768px) {
+    #menuInfoText{
+        font-size: 1em;
+    }
+}
 
+/*
 @media (max-width: 768px) {
     .menu-btn {
         font-size: 0.8em;
@@ -85,7 +103,7 @@
         font-size: 0.8em;
     }   
 }
-
+*/
 
 #content_container {
     width: 100vw;
@@ -96,6 +114,7 @@
     justify-content: center;
     position: relative;
     gap: 7%;
+    overflow-y: scroll;
 
 }
 

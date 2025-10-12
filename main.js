@@ -351,7 +351,6 @@ function signVideoBtnClick(){
                     showVideo2(video.title, video.id);
                 };
                 div.innerHTML = `
-                    <p>${video.num}.</p>
                     <p class="video_title">${video.title}</p>
                     `;
 
