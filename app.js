@@ -150,4 +150,20 @@ app.get('/signVideo/list', async (req, res) => {
     }
 });
 
+app.post('/changePassword', async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    const userId = req.session.userId;
+    if (!userId || !oldPassword || !newPassword) {
+        return res.status(400).json({ success: false, message: '필수 정보 누락' });
+    }
+    try {
+        // 비밀번호 변경 로직
+        const sql = 'UPDATE user_info SET password = ? WHERE id = ? AND password = ?';
+        await db.query(sql, [newPassword, userId, oldPassword]);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ success: false, message: 'DB 오류', error: err.message });
+    }
+});
+
 app.listen(PORT);

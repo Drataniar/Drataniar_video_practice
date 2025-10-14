@@ -4,10 +4,18 @@ const contentContainer = document.getElementById("content_container");
 
 
 function toMain(){
-    selectListContainer.innerHTML = '';
     location.href = 'home.html';
 }
 
+function goToMain(type) {
+    if (type === 'qa') {
+        location.href = `/qaPage/qaPage.html`;
+    }
+    else{
+        location.href = `main.html?type=${encodeURIComponent(type)}`;
+    }
+        
+    }
 
 const params = new URLSearchParams(window.location.search);
 const type = params.get('type');
@@ -37,6 +45,49 @@ if (type === 'notice') {
     };
 } else if (type === 'sign') {
     signVideoBtnClick();
+} else if (type === 'changePw') {
+    contentContainer.innerHTML = `
+        <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+            <h2 style="text-align: center;">비밀번호 변경</h2>
+            <input id="pw" type="password" placeholder="현재 비밀번호" style="margin:10px; font-size:1.2em; padding:8px;">
+            <input id="pw1" type="password" placeholder="새 비밀번호" style="margin:10px; font-size:1.2em; padding:8px;">
+            <input id="pw2" type="password" placeholder="새 비밀번호 확인" style="margin:10px; font-size:1.2em; padding:8px;">
+            <button id="changePwBtn" style="margin:10px; font-size:1.1em; padding:8px 20px;">비밀번호 변경</button>
+        </div>
+    `;
+    document.getElementById('changePwBtn').onclick = async function() {
+        const pw = document.getElementById('pw').value
+        const pw1 = document.getElementById('pw1').value;
+        const pw2 = document.getElementById('pw2').value;
+        if (!pw || !pw1 || !pw2) {
+            alert('비밀번호를 모두 입력하세요.');
+            return;
+        }
+        if (pw1 !== pw2) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+        try {
+            const res = await fetch('/changePassword', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    oldPassword: pw,    
+                    newPassword: pw1 
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                alert('비밀번호가 성공적으로 변경되었습니다.');
+                location.href = 'home.html';
+            } else {
+                alert('비밀번호 변경 실패: ' + (data.message || '오류'));
+            }
+        } catch (err) {
+            alert('서버 오류: ' + err.message);
+        }
+    };
 }
 
 document.getElementById('logoutBtn').addEventListener('click', async function() {

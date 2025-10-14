@@ -1,5 +1,4 @@
 function toMain(){
-    selectListContainer.innerHTML = '';
     location.href = 'home.html';
 }
 

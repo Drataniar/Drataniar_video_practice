@@ -5,9 +5,18 @@ const qaWithName = document.getElementById("qa-with-name");
 
 
 function toMain(){
-    selectListContainer.innerHTML = '';
     location.href = '../home.html';
 }
+
+function goToMain(type) {
+    if (type === 'qa') {
+        location.href = `/qaPage/qaPage.html`;
+    }
+    else{
+        location.href = `../main.html?type=${encodeURIComponent(type)}`;
+    }
+        
+    }
 
 document.getElementById('logoutBtn').addEventListener('click', async function() {
     if (window._mainPlayer) window._mainPlayer.destroy();
