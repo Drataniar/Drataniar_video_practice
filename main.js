@@ -49,12 +49,15 @@ if (type === 'notice') {
     contentContainer.innerHTML = `
         <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">비밀번호 변경</h2>
+            <input type="button" class="pw-toggle" value="비밀번호 표시/숨기기" onclick="togglePasswordVisibility()">
             <input id="pw" type="password" placeholder="현재 비밀번호" style="margin:10px; font-size:1.2em; padding:8px;">
             <input id="pw1" type="password" placeholder="새 비밀번호" style="margin:10px; font-size:1.2em; padding:8px;">
             <input id="pw2" type="password" placeholder="새 비밀번호 확인" style="margin:10px; font-size:1.2em; padding:8px;">
             <button id="changePwBtn" style="margin:10px; font-size:1.1em; padding:8px 20px;">비밀번호 변경</button>
         </div>
     `;
+
+
     document.getElementById('changePwBtn').onclick = async function() {
         const pw = document.getElementById('pw').value
         const pw1 = document.getElementById('pw1').value;
@@ -78,7 +81,7 @@ if (type === 'notice') {
                 })
             });
             const data = await res.json();
-            if (data.success) {
+            if (data.success === true) {
                 alert('비밀번호가 성공적으로 변경되었습니다.');
                 location.href = 'home.html';
             } else {
@@ -460,3 +463,10 @@ function showVideo2(title, videoId){
 
 
 }
+
+    function togglePasswordVisibility() {
+        const passwordFields = document.querySelectorAll('#pw, #pw1, #pw2');
+        passwordFields.forEach(field => {
+            field.type = field.type === 'password' ? 'text' : 'password';
+        });
+    }

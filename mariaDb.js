@@ -10,6 +10,11 @@ const pool = mariadb.createPool({
   connectionLimit: 5
 });
 
+// NOTE: To ensure proper handling of Unicode (한글) make sure your MariaDB server,
+// database and tables use utf8mb4 charset and a unicode collation (e.g. utf8mb4_unicode_ci).
+// You can add charset in the connection config if needed (some drivers support it):
+// charset: 'utf8mb4'
+
 async function query(sql, params) {
   let conn;
   try {

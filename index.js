@@ -1,7 +1,7 @@
 document.getElementById('loginBtn').addEventListener('click', async function() {
 
-	const id = document.getElementById('id_text').value;
-	const password = document.getElementById('pw_text').value;
+	const id = (document.getElementById('id_text').value || '').normalize('NFC');
+	const password = (document.getElementById('pw_text').value || '').normalize('NFC');
 	const res = await fetch('/login', {
 		method: 'POST',
 		headers: {
