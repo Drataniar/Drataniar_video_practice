@@ -17,6 +17,10 @@ function goToMain(type) {
         
     }
 
+function refresh(){
+    location.reload();
+}
+
 const params = new URLSearchParams(window.location.search);
 const type = params.get('type');
 
@@ -164,16 +168,6 @@ function videoBtnClick(rerole=0){
 
             // 3. select_list_container 초기화
             clearSelectListContainer('flex','video');
-            const div = document.createElement("div");
-                div.className = "video_description refresh_btn";
-                div.onclick = function() {
-                    videoBtnClick(1);
-                };
-                div.innerHTML = `
-                    <p class="video_title">새로 고침</p>
-                    `;
-
-            selectListContainer.appendChild(div);
 
             // 4. 데이터 넣기
             videoList.forEach(video => {

@@ -18,6 +18,10 @@ function goToMain(type) {
         
     }
 
+    function refresh(){
+    location.reload();
+}
+
 document.getElementById('logoutBtn').addEventListener('click', async function() {
     if (window._mainPlayer) window._mainPlayer.destroy();
         if (window._miniPlayer) window._miniPlayer.destroy();
