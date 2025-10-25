@@ -18,7 +18,7 @@ function goToMain(type) {
         
     }
 
-    function refresh(){
+function refresh(){
     location.reload();
 }
 
@@ -76,6 +76,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 
 async function makeWhoToChat()
 {
+    changeHeader(true);
     document.getElementById('qaSendBtn').onclick = null;
     qaWithName.textContent = '';
     qaMessages.innerHTML = '';
@@ -106,6 +107,7 @@ async function makeWhoToChat()
 }
 
 async function startChat(toId, toName){
+    changeHeader(false);
     clearSelectListContainer('none','');
     clearQaContent('flex');
 
@@ -214,3 +216,14 @@ function clearQaContent(display){
 document.addEventListener('DOMContentLoaded', function() {
     makeWhoToChat();
 });
+
+function changeHeader(isRefrechTrue){
+    if(isRefrechTrue){
+        document.getElementById('header').style.height = '270px';
+        document.getElementById('refresh').style.display = 'flex';
+    }
+    else{
+        document.getElementById('header').style.height = '200px';
+        document.getElementById('refresh').style.display = 'none';
+    }
+}

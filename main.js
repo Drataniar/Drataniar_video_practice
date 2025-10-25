@@ -26,6 +26,7 @@ const type = params.get('type');
 
 // type 값에 따라 분기 처리
 if (type === 'notice') {
+    changeHeader(true);
     contentContainer.innerHTML = '';
     contentContainer.innerHTML = `
         <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
@@ -38,6 +39,7 @@ if (type === 'notice') {
 } else if (type === 'video') {
     videoBtnClick();
 }  else if (type === 'ai') {
+    changeHeader(false);
     contentContainer.style.height = '85vh';
     contentContainer.style.backgroundImage = "url('./img/AIintro.jpg')";
     contentContainer.style.backgroundSize = 'contain'; // 사진 전체가 보이도록
@@ -50,6 +52,7 @@ if (type === 'notice') {
 } else if (type === 'sign') {
     signVideoBtnClick();
 } else if (type === 'changePw') {
+    changeHeader(false);
     contentContainer.innerHTML = `
         <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">비밀번호 변경</h2>
@@ -148,7 +151,7 @@ window.addEventListener('DOMContentLoaded', async function() {
 
 
 function videoBtnClick(rerole=0){
-
+    changeHeader(true);
     if(selectListContainer.style.display === 'flex'&&rerole===0){
         //이미 표시 중이면 숨기기
         clearSelectListContainer('none','');
@@ -216,6 +219,7 @@ function clearSelectListContainer(display,value) {
 
 
 function showInfo(title, videoId, miniid, info){
+    changeHeader(false);
     const videoContainer = document.getElementById('content_container');
     clearSelectListContainer('flex','video');
     selectListContainer.innerHTML = `
@@ -235,6 +239,8 @@ function showInfo(title, videoId, miniid, info){
 
 
 function showVideo(title, videoId, miniid){
+    changeHeader(false);
+    clearSelectListContainer('none','');
     const videoContainer = document.getElementById('content_container');
     videoContainer.innerHTML = `
         <div id="video_top_bar" style="width:100%; height:10vh; display:flex; align-items:center;">
@@ -377,6 +383,7 @@ function showVideo(title, videoId, miniid){
 
 
 function signVideoBtnClick(){
+    changeHeader(true);
 
     if(selectListContainer.style.display === 'flex'){
         //이미 표시 중이면 숨기기
@@ -433,6 +440,7 @@ function signVideoBtnClick(){
 }
 
 function showVideo2(title, videoId){
+    changeHeader(false);
     const videoContainer = document.getElementById('content_container');
     videoContainer.innerHTML = `
         <div id="video_top_bar" style="width:100%; height:10vh; display:flex; align-items:center;">
@@ -480,3 +488,14 @@ function showVideo2(title, videoId){
             field.type = field.type === 'password' ? 'text' : 'password';
         });
     }
+
+function changeHeader(isRefrechTrue){
+    if(isRefrechTrue){
+        document.getElementById('header').style.height = '270px';
+        document.getElementById('refresh').style.display = 'flex';
+    }
+    else{
+        document.getElementById('header').style.height = '200px';
+        document.getElementById('refresh').style.display = 'none';
+    }
+}
