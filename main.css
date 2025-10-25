@@ -111,6 +111,9 @@
     border: 3px solid black;
     transition: transform 0.2s; /* 부드럽게 확대 */
 }
+.refresh_btn{
+    background-color: greenyellow;
+}
 
 .not_started {
     background: rgba(150,150,150,1);

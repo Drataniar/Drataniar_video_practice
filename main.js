@@ -143,9 +143,9 @@ window.addEventListener('DOMContentLoaded', async function() {
 });
 
 
-function videoBtnClick(){
+function videoBtnClick(rerole=0){
 
-    if(selectListContainer.style.display === 'flex'){
+    if(selectListContainer.style.display === 'flex'&&rerole===0){
         //이미 표시 중이면 숨기기
         clearSelectListContainer('none','');
         return;
@@ -164,7 +164,16 @@ function videoBtnClick(){
 
             // 3. select_list_container 초기화
             clearSelectListContainer('flex','video');
+            const div = document.createElement("div");
+                div.className = "video_description refresh_btn";
+                div.onclick = function() {
+                    videoBtnClick(1);
+                };
+                div.innerHTML = `
+                    <p class="video_title">새로 고침</p>
+                    `;
 
+            selectListContainer.appendChild(div);
 
             // 4. 데이터 넣기
             videoList.forEach(video => {
@@ -214,6 +223,13 @@ function clearSelectListContainer(display,value) {
 
 function showInfo(title, videoId, miniid, info){
     const videoContainer = document.getElementById('content_container');
+    clearSelectListContainer('flex','video');
+    selectListContainer.innerHTML = `
+    <button onclick="document.getElementById('content_container').innerHTML=''; 
+        videoBtnClick(1);">
+        영상 목록으로 돌아가기
+        </button>
+    `;
     videoContainer.innerHTML = `
         <div id="video_info" style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">${title}</h2>
