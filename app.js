@@ -53,9 +53,9 @@ app.post('/login', async (req, res) => {
     console.log(`Attempted login with ID: ${rawId}, Password: ${rawPassword}`);
 
 	try {
-        const sql = 'SELECT id, master, name, password FROM user_info WHERE id = ? OR id = ? AND password = ? OR password = ?';
-        const rows = await db.query(sql, [idNFC, idNFD, passwordNFC, passwordNFD]);
-        console.log(`DB Query: ${sql}, Params: ${[idNFC, idNFD, passwordNFC, passwordNFD]}`);
+        const sql = 'SELECT id, master, name, password FROM user_info WHERE id = ?  AND password = ? ';
+        const rows = await db.query(sql, [idNFC, passwordNFC]);
+        console.log(`DB Query: ${sql}, Params: ${[idNFC, passwordNFC]}`);
         console.log(`Query Results: ${JSON.stringify(rows)}`);
 		//const rows = await db.query('SELECT id, master, name FROM user_info WHERE id = ? AND password = ?', [id, password]);
 		if (rows.length > 0) {
