@@ -178,7 +178,12 @@ function videoBtnClick(rerole=0){
                 div.className = "video_description";
                 div.onclick = function() {
                     clearSelectListContainer('none','');
-                    showInfo(video.title, video.id, video.miniid, video.info);
+                    if(video.isInfo==1){
+                        showInfo(video.title, video.id, video.miniid, video.info);
+                    }
+                    else{
+                        showVideo(video.title, video.id, video.miniid);
+                    }
                 };
                 div.innerHTML = `
                     <p class="video_title">${video.title}</p>
