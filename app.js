@@ -87,7 +87,7 @@ app.post('/logout', (req, res) => {
 
 app.get('/video/list', async (req, res) => {
         try {
-        const sql = 'SELECT title, id, miniid, date, info, isInfo FROM video';
+        const sql = 'SELECT title, id, miniid, date, info, isInfo, isMiniSound FROM video';
         const results = await db.query(sql);
         res.json(results);
     } catch (err) {

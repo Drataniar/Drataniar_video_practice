@@ -179,10 +179,10 @@ function videoBtnClick(rerole=0){
                 div.onclick = function() {
                     clearSelectListContainer('none','');
                     if(video.isInfo==1){
-                        showInfo(video.title, video.id, video.miniid, video.info);
+                        showInfo(video.title, video.id, video.miniid, video.info, video.isMiniSound);
                     }
                     else{
-                        showVideo(video.title, video.id, video.miniid);
+                        showVideo(video.title, video.id, video.miniid, video.isMiniSound);
                     }
                 };
                 div.innerHTML = `
@@ -223,7 +223,7 @@ function clearSelectListContainer(display,value) {
 }
 
 
-function showInfo(title, videoId, miniid, info){
+function showInfo(title, videoId, miniid, info, isMiniSound){
     changeHeader(false);
     const videoContainer = document.getElementById('content_container');
     clearSelectListContainer('flex','video');
@@ -237,13 +237,13 @@ function showInfo(title, videoId, miniid, info){
         <div id="video_info" style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">${title}</h2>
             <p>${info}</p>
-            <button id="play_video_btn" onclick="showVideo('${title}', '${videoId}', '${miniid}')" ">영상 재생</button>
+            <button id="play_video_btn" onclick="showVideo('${title}', '${videoId}', '${miniid}', '${isMiniSound}')">영상 재생</button>
         </div>
     `;
 }
 
 
-function showVideo(title, videoId, miniid){
+function showVideo(title, videoId, miniid, isMiniSound){
     changeHeader(false);
     clearSelectListContainer('none','');
     const videoContainer = document.getElementById('content_container');
@@ -257,7 +257,7 @@ function showVideo(title, videoId, miniid){
                 src="https://www.youtube.com/embed/${videoId}?enablejsapi=1"
                 frameborder="0" allow="autoplay; encrypted-media" ></iframe>
             <iframe id="mini_video" width="100%" height="100%"
-                src="https://www.youtube.com/embed/${miniid}?enablejsapi=1&mute=1"
+                src="https://www.youtube.com/embed/${miniid}?enablejsapi=1"
                 frameborder="0" allow="autoplay; encrypted-media" 
                 style="position:absolute; right:0; bottom:0; z-index:10;">
             </iframe>
@@ -299,34 +299,65 @@ function showVideo(title, videoId, miniid){
         // 기존 플레이어 객체 제거
         if (window._mainPlayer) window._mainPlayer.destroy();
         if (window._miniPlayer) window._miniPlayer.destroy();
+
+        console.log("isMiniSound:", isMiniSound);
         // 새 플레이어 생성
-        window._mainPlayer = new YT.Player('main_video', {
-            events: {
-                'onStateChange': syncMiniPlayer,
-                'onPlaybackQualityChange': syncMiniPlayer,
-                'onPlaybackRateChange': syncMiniPlayer
-            }
-        });
-        window._miniPlayer = new YT.Player('mini_video',{
-            events: {
-                'onStateChange': function(event) {
-                                    muteAll(event);
-                                    syncMainPlayer(event);
-                                },
-                'onPlaybackQualityChange': syncMainPlayer,
-                'onPlaybackRateChange': syncMainPlayer,
-                'onVolumeChange': muteAll
-            }
-        });
+        if(isMiniSound===1){
+            window._mainPlayer = new YT.Player('main_video', {
+                events: {
+                    'onStateChange': function(event) {
+                                        muteMainPlayer(event);
+                                        syncMiniPlayer(event);
+                                    },
+                    'onPlaybackQualityChange': syncMiniPlayer,
+                    'onPlaybackRateChange': syncMiniPlayer,
+                    'onVolumeChange': muteMainPlayer
+                }
+            });
+            window._miniPlayer = new YT.Player('mini_video',{
+                events: {
+                    'onStateChange': syncMainPlayer,
+                    'onPlaybackQualityChange': syncMainPlayer,
+                    'onPlaybackRateChange': syncMainPlayer,
+                }
+            });
+            console.log("isMiniSound:", isMiniSound);
+        }else{
+            window._mainPlayer = new YT.Player('main_video', {
+                events: {
+                    'onStateChange': syncMiniPlayer,
+                    'onPlaybackQualityChange': syncMiniPlayer,
+                    'onPlaybackRateChange': syncMiniPlayer
+                }
+            });
+            window._miniPlayer = new YT.Player('mini_video',{
+                events: {
+                    'onStateChange': function(event) {
+                                        muteMiniPlayer(event);
+                                        syncMainPlayer(event);
+                                    },
+                    'onPlaybackQualityChange': syncMainPlayer,
+                    'onPlaybackRateChange': syncMainPlayer,
+                    'onVolumeChange': muteMiniPlayer
+                }
+            });
+        }
+        
     }
 
-    function muteAll(event) {
+    function muteMiniPlayer(event) {
             // 항상 음소거 유지
             if (!window._miniPlayer.isMuted()) {
                 window._miniPlayer.mute();
             }
         }
 
+        function muteMainPlayer(event) {
+            // 항상 음소거 유지
+            if (!window._mainPlayer.isMuted()) {
+                window._mainPlayer.mute();
+            }
+        }
 
     // 동기화 함수
     function syncMiniPlayer(event) {
