@@ -444,7 +444,7 @@ function signVideoBtnClick(){
                 div.innerHTML = `
                     <p>제과제빵 실습에 필요한 전공용어 중<br> 
                     수어 표현이 없는 단어를 대전직업능력개발원에서 자체 제작 후<br>
-                    대전광역시 농아인협회에 심의를 거처 교육을 목적으로 영상 제작</p>
+                    대전광역시 농아인협회에서 심의를 거처 교육을 목적으로 영상 제작</p>
                     <p>(영상으로 수어를 학습하세요)</p>`;
                 div.classList.add('important_description');
             selectListContainer.appendChild(div);
