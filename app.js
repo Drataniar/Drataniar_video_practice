@@ -212,4 +212,9 @@ app.post('/changePassword', async (req, res) => {
     }
 });
 
+app.get('/pdf/:filename', (req, res) => {
+  const filePath = path.join(__dirname, 'pdf', req.params.filename);
+  res.sendFile(filePath); // Content-Disposition: inline
+});
+
 app.listen(PORT);
