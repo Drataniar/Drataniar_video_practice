@@ -75,6 +75,17 @@
     border: 5px solid black;
 }
 
+.menuBtn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.menuBtnTitle{
+    font-size: 1.2em;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     #menu{
         height: 80px;
@@ -86,6 +97,27 @@
         font-size: 0.8em;
     }
     .menu-btn {
+        font-size: 0.8em;
+    }
+    .menuBtnTitle{
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 500px) {
+    #menu{
+        height: 80px;
+    }
+    #menuInfo{
+        height: 30px;
+    }
+    #menuInfoText{
+        font-size: 0.6em;
+    }
+    .menu-btn {
+        font-size: 0.6em;
+    }
+    .menuBtnTitle{
         font-size: 0.8em;
     }
 }
