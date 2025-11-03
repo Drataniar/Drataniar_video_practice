@@ -32,7 +32,7 @@ if (type === 'notice') {
         <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">공지사항</h2>
             <img src="./img/loginPage.jpg" alt="공지사항 이미지" style="max-width:70%; max-height:80%; height:auto; margin-bottom:20px;">
-            <p>현재 공지사항이 없습니다.</p>
+            <button id="viewTimetableBtn" onclick="window.open('./pdf/시간표.pdf', '_blank');">시간표 보기</button>
         </div>
     `;
     // 알림, 공지사항 관련 코드
@@ -63,7 +63,6 @@ if (type === 'notice') {
             <button id="changePwBtn" style="margin:10px; font-size:1.1em; padding:8px 20px;">비밀번호 변경</button>
         </div>
     `;
-
 
     document.getElementById('changePwBtn').onclick = async function() {
         const pw = document.getElementById('pw').value
