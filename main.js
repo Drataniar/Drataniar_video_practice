@@ -32,7 +32,7 @@ if (type === 'notice') {
         <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">공지사항</h2>
             <img src="./img/loginPage.jpg" alt="공지사항 이미지" style="max-width:70%; max-height:80%; height:auto; margin-bottom:20px;">
-            <button id="viewTimetableBtn" onclick="window.open('./pdf/시간표.pdf', '_blank');">시간표 보기</button>
+            <button id="viewTimetableBtn" onclick="window.open('./pdf/시간표2.pdf', '_blank');">시간표 보기</button>
         </div>
     `;
     // 알림, 공지사항 관련 코드
