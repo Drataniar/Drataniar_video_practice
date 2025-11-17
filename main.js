@@ -32,10 +32,9 @@ if (type === 'notice') {
         <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">공지사항</h2>
             <img src="./img/loginPage.jpg" alt="공지사항 이미지" style="max-width:70%; max-height:80%; height:auto; margin-bottom:20px;">
-            <button id="viewTimetableBtn" onclick="window.open('./pdf/시간표2.pdf', '_blank');">시간표 보기</button>
+            <button id="viewTimetableBtn" onclick="showTimeTable();">시간표 보기</button>
         </div>
     `;
-    // 알림, 공지사항 관련 코드
 } else if (type === 'video') {
     videoBtnClick();
 }  else if (type === 'ai') {
@@ -534,3 +533,18 @@ function changeHeader(isRefrechTrue){
         document.getElementById('refresh').style.display = 'none';
     }
 }
+
+// 시간표 보기 버튼 클릭 시 이미지 표시
+    function showTimeTable() {
+        contentContainer.innerHTML = `
+            <div style="width:100%; max-width:500px; margin:0 auto; height:70vh; overflow-y:auto; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; background:#fff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.1); padding:20px;">
+                <h2 style='text-align:center;'>시간표</h2>
+                <img src="./pdf/모바일 시간표001.jpg" alt="시간표 1" style="width:100%; max-width:400px; margin-bottom:20px; border:1px solid #eee; border-radius:8px;">
+                <img src="./pdf/모바일 시간표002.jpg" alt="시간표 2" style="width:100%; max-width:400px; border:1px solid #eee; border-radius:8px;">
+                <button id="closeTimetableBtn" style="margin-top:24px; padding:8px 24px; font-size:1em;">닫기</button>
+            </div>
+        `;
+        document.getElementById('closeTimetableBtn').onclick = function() {
+            location.reload();
+        };
+    };
