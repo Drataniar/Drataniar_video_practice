@@ -29,9 +29,12 @@ if (type === 'notice') {
     changeHeader(true);
     contentContainer.innerHTML = '';
     contentContainer.innerHTML = `
-        <div style="width:100%; height:70vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+        <div style="width:100%; height:80vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">공지사항</h2>
             <img src="./img/loginPage.jpg" alt="공지사항 이미지" style="max-width:70%; max-height:80%; height:auto; margin-bottom:20px;">
+            <h2 style="text-align: center;">동계 방학 기간</br>
+                                            12월 15일~1월 9일</br>
+                                            개학일 2026년 1월 12일</h2>
             <button id="viewTimetableBtn" onclick="showTimeTable();">시간표 보기</button>
         </div>
     `;
