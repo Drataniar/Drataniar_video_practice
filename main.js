@@ -29,7 +29,7 @@ if (type === 'notice') {
     changeHeader(true);
     contentContainer.innerHTML = '';
     contentContainer.innerHTML = `
-        <div style="width:100%; height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+        <div style="width:100%; height:100vh;  top: 100%; display:flex; align-items:center; justify-content:center; flex-direction:column;">
             <h2 style="text-align: center;">공지사항</h2>
             <img src="./img/loginPage.jpg" alt="공지사항 이미지" style="max-width:70%; max-height:80%; height:auto; margin-bottom:20px;">
             <h2 style="text-align: center;">동계 방학 기간</br>
